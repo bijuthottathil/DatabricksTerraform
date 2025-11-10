@@ -44,3 +44,18 @@ output "gold_container_name" {
   value       = azurerm_storage_container.gold.name
 }
 
+output "bronze_container_id" {
+  description = "ID of the bronze container"
+  value       = azurerm_storage_container.bronze.id
+}
+
+output "silver_container_id" {
+  description = "ID of the silver container"
+  value       = azurerm_storage_container.silver.id
+}
+
+output "gold_container_id" {
+  description = "ID of the gold container"
+  value       = azurerm_storage_container.gold.id
+}
+

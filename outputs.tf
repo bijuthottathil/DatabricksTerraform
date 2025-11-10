@@ -108,3 +108,38 @@ output "unity_catalog_metastore_storage_root" {
   value       = module.unity_catalog_metastore.storage_root
 }
 
+output "storage_credential_id" {
+  description = "ID of the Unity Catalog storage credential"
+  value       = module.unity_catalog_metastore.storage_credential_id
+}
+
+output "bronze_external_location_id" {
+  description = "ID of the bronze external location"
+  value       = module.unity_catalog_metastore.bronze_external_location_id
+}
+
+output "bronze_external_location_url" {
+  description = "URL of the bronze external location"
+  value       = module.unity_catalog_metastore.bronze_external_location_url
+}
+
+output "silver_external_location_id" {
+  description = "ID of the silver external location"
+  value       = module.unity_catalog_metastore.silver_external_location_id
+}
+
+output "silver_external_location_url" {
+  description = "URL of the silver external location"
+  value       = module.unity_catalog_metastore.silver_external_location_url
+}
+
+output "gold_external_location_id" {
+  description = "ID of the gold external location"
+  value       = module.unity_catalog_metastore.gold_external_location_id
+}
+
+output "gold_external_location_url" {
+  description = "URL of the gold external location"
+  value       = module.unity_catalog_metastore.gold_external_location_url
+}
+

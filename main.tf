@@ -76,7 +76,6 @@ module "metastore_storage" {
   tier                             = var.storage_account_tier
   replication_type                 = var.storage_account_replication_type
   service_principal_id             = module.service_principal.id
-  databricks_workspace_storage_identity = module.databricks_workspace.storage_account_identity
   tags                             = var.tags
 
   depends_on = [
@@ -85,12 +84,31 @@ module "metastore_storage" {
   ]
 }
 
+# Role assignment for Databricks workspace managed identity to access metastore storage
+resource "azurerm_role_assignment" "metastore_workspace_access" {
+  scope                = module.metastore_storage.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = module.databricks_workspace.managed_identity_principal_id
+
+  depends_on = [
+    module.metastore_storage,
+    module.databricks_workspace
+  ]
+}
+
 module "unity_catalog_metastore" {
   source = "./modules/unity-catalog-metastore"
 
-  metastore_name = var.metastore_name != null ? var.metastore_name : "${var.databricks_workspace_name}-metastore"
-  storage_root   = module.metastore_storage.metastore_path
-  region         = lower(replace(var.location, " ", ""))
-  workspace_id   = module.databricks_workspace.workspace_id
+  metastore_name                    = var.metastore_name != null ? var.metastore_name : "${var.databricks_workspace_name}-metastore"
+  storage_root                      = module.metastore_storage.metastore_path
+  region                            = lower(replace(var.location, " ", ""))
+  workspace_id                      = module.databricks_workspace.workspace_id
+  service_principal_application_id  = module.service_principal.application_id
+  service_principal_client_secret   = module.service_principal.password
+  tenant_id                         = module.service_principal.tenant_id
+  storage_account_name              = module.storage_account.name
+  bronze_container_name             = module.storage_account.bronze_container_name
+  silver_container_name             = module.storage_account.silver_container_name
+  gold_container_name               = module.storage_account.gold_container_name
 }
 

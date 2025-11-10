@@ -26,10 +26,3 @@ resource "azurerm_role_assignment" "metastore_blob_contributor_sp" {
   principal_id         = var.service_principal_id
 }
 
-resource "azurerm_role_assignment" "metastore_blob_contributor_workspace" {
-  count                = var.databricks_workspace_storage_identity != null ? 1 : 0
-  scope                = azurerm_storage_account.this.id
-  role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = var.databricks_workspace_storage_identity
-}
-

@@ -20,3 +20,11 @@ resource "azurerm_databricks_workspace" "this" {
   tags = var.tags
 }
 
+# Managed identity for the Databricks workspace
+resource "azurerm_user_assigned_identity" "databricks_mi" {
+  name                = "${var.workspace_name}-mi"
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  tags                = var.tags
+}
+

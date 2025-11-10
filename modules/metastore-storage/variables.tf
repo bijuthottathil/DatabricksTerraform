@@ -46,9 +46,3 @@ variable "service_principal_id" {
   type        = string
 }
 
-variable "databricks_workspace_storage_identity" {
-  description = "Databricks workspace storage identity ID for Storage Blob Data Contributor role"
-  type        = string
-  default     = null
-}
-

@@ -23,3 +23,13 @@ output "storage_account_identity" {
   value       = try(azurerm_databricks_workspace.this.storage_account_identity[0].principal_id, "")
 }
 
+output "managed_identity_principal_id" {
+  description = "The Principal ID of the User Assigned Managed Identity"
+  value       = azurerm_user_assigned_identity.databricks_mi.principal_id
+}
+
+output "managed_identity_id" {
+  description = "The ID of the User Assigned Managed Identity"
+  value       = azurerm_user_assigned_identity.databricks_mi.id
+}
+

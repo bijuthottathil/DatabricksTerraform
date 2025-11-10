@@ -25,10 +25,8 @@ provider "azuread" {
 }
 
 provider "databricks" {
-  # Authentication can be done via:
-  # 1. Azure CLI: az login
-  # 2. Service Principal: Set AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, AZURE_TENANT_ID
-  # 3. PAT Token: Set DATABRICKS_HOST and DATABRICKS_TOKEN
-  # Host will be automatically detected from workspace URL or set DATABRICKS_HOST
+  # Authentication via Azure CLI or Service Principal environment variables
+  # Ensure you're logged in with: az login
+  # The provider will automatically use Azure authentication for Databricks
 }
 
