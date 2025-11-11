@@ -86,3 +86,8 @@ variable "metastore_name" {
   default     = null
 }
 
+variable "databricks_account_id" {
+  description = "Databricks Account ID for Unity Catalog"
+  type        = string
+}
+

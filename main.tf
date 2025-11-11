@@ -16,14 +16,14 @@ module "vnet" {
   tags                = var.tags
 }
 
-module "key_vault" {
-  source = "./modules/key-vault"
-
-  resource_group_name = module.resource_group.name
-  location            = module.resource_group.location
-  sku                 = var.key_vault_sku
-  tags                = var.tags
-}
+# module "key_vault" {
+#   source = "./modules/key-vault"
+#
+#   resource_group_name = module.resource_group.name
+#   location            = module.resource_group.location
+#   sku                 = var.key_vault_sku
+#   tags                = var.tags
+# }
 
 module "service_principal" {
   source = "./modules/service-principal"
@@ -98,6 +98,11 @@ resource "azurerm_role_assignment" "metastore_workspace_access" {
 
 module "unity_catalog_metastore" {
   source = "./modules/unity-catalog-metastore"
+
+  providers = {
+    databricks.account   = databricks.account
+    databricks.workspace = databricks.workspace
+  }
 
   metastore_name                    = var.metastore_name != null ? var.metastore_name : "${var.databricks_workspace_name}-metastore"
   storage_root                      = module.metastore_storage.metastore_path

@@ -24,9 +24,18 @@ provider "azurerm" {
 provider "azuread" {
 }
 
+# Databricks provider for account-level operations (Unity Catalog metastore)
+# Uses Azure CLI authentication (requires 'az login')
 provider "databricks" {
-  # Authentication via Azure CLI or Service Principal environment variables
-  # Ensure you're logged in with: az login
-  # The provider will automatically use Azure authentication for Databricks
+  alias      = "account"
+  host       = "https://accounts.azuredatabricks.net"
+  account_id = var.databricks_account_id
+}
+
+# Databricks provider for workspace-level operations
+# Uses Azure CLI authentication (requires 'az login')
+provider "databricks" {
+  alias = "workspace"
+  host  = module.databricks_workspace.workspace_url
 }
 

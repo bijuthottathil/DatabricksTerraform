@@ -28,15 +28,15 @@ output "private_subnet_id" {
   value       = module.vnet.private_subnet_id
 }
 
-output "key_vault_id" {
-  description = "ID of the Key Vault"
-  value       = module.key_vault.id
-}
-
-output "key_vault_name" {
-  description = "Name of the Key Vault"
-  value       = module.key_vault.name
-}
+# output "key_vault_id" {
+#   description = "ID of the Key Vault"
+#   value       = module.key_vault.id
+# }
+#
+# output "key_vault_name" {
+#   description = "Name of the Key Vault"
+#   value       = module.key_vault.name
+# }
 
 output "storage_account_id" {
   description = "ID of the storage account"
